@@ -9,6 +9,11 @@ public class CircleMovement : MonoBehaviour
     private Rigidbody2D body;
     [SerializeField] private float speed;
 
+    public bool isGrounded;
+    public Transform groundCheck;
+    public float groundCheckRadius;
+    public LayerMask groundLayer;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -20,7 +25,10 @@ public class CircleMovement : MonoBehaviour
     {
         body.velocity = new Vector2(Input.GetAxis("Horizontal")*speed, body.velocity.y);
 
-        if(Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0)
-            body.velocity = new Vector2(body.velocity.x, speed);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+
+        if(isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0)){
+            body.AddForce(Vector2.up, ForceMode2D.Impulse);
+        }
     }
 }
