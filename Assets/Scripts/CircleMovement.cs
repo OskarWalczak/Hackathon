@@ -41,8 +41,7 @@ public class CircleMovement : MonoBehaviour
 
         shouldDie = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, deathLayer);
 
-        if(isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0)){
-            // body.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+        if(isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0)) {
             body.velocity = new Vector2(body.velocity.x, jumpSpeed);
         }
 
