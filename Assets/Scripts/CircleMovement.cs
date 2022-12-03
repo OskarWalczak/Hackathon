@@ -23,7 +23,7 @@ public class CircleMovement : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
-        m_Energy = 1f;
+        m_Energy = 1.0f;
         body = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
     }
