@@ -45,7 +45,6 @@ public class CircleMovement : MonoBehaviour
 
         if(isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0))
         {
-            // body.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
             body.velocity = new Vector2(body.velocity.x, jumpSpeed * m_Energy);
         }
 
@@ -54,7 +53,7 @@ public class CircleMovement : MonoBehaviour
             die();
         }
 
-        // anim.SetBool("run", horizontal_input != 0);
+        anim.SetBool("run", horizontal_input != 0);
     }
 
     private void die(){
