@@ -13,6 +13,7 @@ public class CircleMovement : MonoBehaviour
 
     public bool isGrounded;
     public Transform groundCheck;
+    public Transform groundCheck2;
     public float groundCheckRadius;
     public LayerMask groundLayer;
 
@@ -38,9 +39,9 @@ public class CircleMovement : MonoBehaviour
         else if (horizontal_input < -0.01f)
             transform.localScale = new Vector3(-1, 1, 1);
 
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer) || Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, groundLayer);
 
-        shouldDie = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, deathLayer);
+        shouldDie = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, deathLayer) || Physics2D.OverlapCircle(groundCheck2.position, groundCheckRadius, deathLayer);
 
         if(isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0))
         {
