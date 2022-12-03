@@ -38,6 +38,10 @@
   <ItemGroup>
      <Compile Include="Assets/Scripts/CircleMovement.cs" />
      <Compile Include="Assets/Scripts/FadingCtrl.cs" />
+     <Compile Include="Assets/Scripts/EnergyCtrl.cs" />
+     <Compile Include="Assets/Scripts/Rotating.cs" />
+     <Compile Include="Assets/Scripts/WaypointFollower.cs" />
+     <Compile Include="Assets/Scripts/PlatformSpeedCtrl.cs" />
      <None Include="Assets/BayatGames/Free Platform Game Assets/Readme.txt" />
      <None Include="Assets/Dragon Warrior Files/Read Me.txt" />
     <Reference Include="UnityEngine">
