@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CircleMovement : MonoBehaviour
 {
-
+    public float m_Energy;
     private Rigidbody2D body;
     [SerializeField] private float speed;
 
@@ -18,17 +18,18 @@ public class CircleMovement : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        m_Energy = 1f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        body.velocity = new Vector2(Input.GetAxis("Horizontal")*speed, body.velocity.y);
+        body.velocity = new Vector2(Input.GetAxis("Horizontal")*speed*m_Energy, body.velocity.y);
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
         if(isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0)){
-            body.AddForce(Vector2.up, ForceMode2D.Impulse);
+            body.AddForce(Vector2.up * m_Energy, ForceMode2D.Impulse);
         }
     }
 }
