@@ -24,7 +24,7 @@ public class FadingCtrl : MonoBehaviour
     {
         {
             Color backgroundColor = m_FadeScreen.color;
-            float newAlpha = Mathf.Min(1, backgroundColor.a + m_FadingSpeed);
+            float newAlpha = Mathf.Min(255, backgroundColor.a + m_FadingSpeed);
             backgroundColor.a = newAlpha;
             m_FadeScreen.color = backgroundColor;
         }
