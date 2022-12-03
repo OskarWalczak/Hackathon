@@ -7,29 +7,56 @@ public class CircleMovement : MonoBehaviour
 {
     public float m_Energy;
     private Rigidbody2D body;
-    [SerializeField] private float speed;
+    public float speed;
+    public float jumpSpeed;
+    private Animator anim;
 
     public bool isGrounded;
     public Transform groundCheck;
     public float groundCheckRadius;
     public LayerMask groundLayer;
 
+    public bool shouldDie;
+    public LayerMask deathLayer;
+
     // Start is called before the first frame update
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
         m_Energy = 1f;
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        body.velocity = new Vector2(Input.GetAxis("Horizontal")*speed*m_Energy, body.velocity.y);
+        float horizontal_input = Input.GetAxis("Horizontal");
+        body.velocity = new Vector2(horizontal_input*speed*m_Energy, body.velocity.y);
+
+        if (horizontal_input > 0.01f)
+            transform.localScale = Vector3.one;
+        else if (horizontal_input < -0.01f)
+            transform.localScale = new Vector3(-1, 1, 1);
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
-        if(isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0)){
-            body.AddForce(Vector2.up * m_Energy, ForceMode2D.Impulse);
+        shouldDie = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, deathLayer);
+
+        if(isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0))
+        {
+            // body.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            body.velocity = new Vector2(body.velocity.x, jumpSpeed * m_Energy);
         }
+
+        if(shouldDie)
+        {
+            die();
+        }
+
+        // anim.SetBool("run", horizontal_input != 0);
+    }
+
+    private void die(){
+        body.position = new Vector2(-8, 8);
     }
 }
