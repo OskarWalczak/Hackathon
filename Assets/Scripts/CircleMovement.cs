@@ -15,6 +15,9 @@ public class CircleMovement : MonoBehaviour
     public float groundCheckRadius;
     public LayerMask groundLayer;
 
+    public bool shouldDie;
+    public LayerMask deathLayer;
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -35,10 +38,20 @@ public class CircleMovement : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
+        shouldDie = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, deathLayer);
+
         if(isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0)){
             body.AddForce(Vector2.up, ForceMode2D.Impulse);
         }
 
+        if(shouldDie){
+            die();
+        }
+        
         anim.SetBool("run", horizontal_input != 0);
+    }
+
+    private void die(){
+        body.position = new Vector2(-8, 8);
     }
 }
