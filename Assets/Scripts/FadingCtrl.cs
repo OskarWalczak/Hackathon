@@ -18,6 +18,9 @@ public class FadingCtrl : MonoBehaviour
     // Start is called before the first frame update
     private void Awake()
     {
+        QualitySettings.vSyncCount = 0;
+        Application.targetFrameRate = 60;
+
         playerLight = GetComponent<Light2D>();
         playerLight.intensity = 1;
         playerLight.pointLightInnerRadius = 20;
