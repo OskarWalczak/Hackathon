@@ -7,7 +7,8 @@ public class CircleMovement : MonoBehaviour
 {
 
     private Rigidbody2D body;
-    [SerializeField] private float speed;
+    public float speed;
+    public float jumpSpeed;
     private Animator anim;
 
     public bool isGrounded;
@@ -41,14 +42,15 @@ public class CircleMovement : MonoBehaviour
         shouldDie = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, deathLayer);
 
         if(isGrounded && (Input.GetKey(KeyCode.Space) || Input.GetAxis("Vertical")>0)){
-            body.AddForce(Vector2.up, ForceMode2D.Impulse);
+            // body.AddForce(Vector2.up * jumpSpeed, ForceMode2D.Impulse);
+            body.velocity = new Vector2(body.velocity.x, jumpSpeed);
         }
 
         if(shouldDie){
             die();
         }
-        
-        anim.SetBool("run", horizontal_input != 0);
+
+        // anim.SetBool("run", horizontal_input != 0);
     }
 
     private void die(){

@@ -37,7 +37,9 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets/Scripts/CircleMovement.cs" />
+     <Compile Include="Assets/Scripts/FadingCtrl.cs" />
      <None Include="Assets/BayatGames/Free Platform Game Assets/Readme.txt" />
+     <None Include="Assets/Dragon Warrior Files/Read Me.txt" />
     <Reference Include="UnityEngine">
         <HintPath>/home/oskar/Unity/Hub/Editor/2021.3.15f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
