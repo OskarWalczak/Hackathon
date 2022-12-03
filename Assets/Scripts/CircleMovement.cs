@@ -8,6 +8,7 @@ public class CircleMovement : MonoBehaviour
 
     private Rigidbody2D body;
     [SerializeField] private float speed;
+    private Animator anim;
 
     public bool isGrounded;
     public Transform groundCheck;
@@ -21,12 +22,19 @@ public class CircleMovement : MonoBehaviour
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        body.velocity = new Vector2(Input.GetAxis("Horizontal")*speed, body.velocity.y);
+        float horizontal_input = Input.GetAxis("Horizontal");
+        body.velocity = new Vector2(horizontal_input*speed, body.velocity.y);
+
+        if (horizontal_input > 0.01f)
+            transform.localScale = Vector3.one;
+        else if (horizontal_input < -0.01f)
+            transform.localScale = new Vector3(-1, 1, 1);
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
 
@@ -39,6 +47,8 @@ public class CircleMovement : MonoBehaviour
         if(shouldDie){
             die();
         }
+        
+        anim.SetBool("run", horizontal_input != 0);
     }
 
     private void die(){
