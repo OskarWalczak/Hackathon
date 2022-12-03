@@ -18,11 +18,11 @@ public class EnergyCtrl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        player.m_Energy =  Mathf.Max(0.2f, player.m_Energy - m_EnergyDrainSpeed);
-        if(Input.GetKey("v"))
-        {
-            player.m_Energy =  Mathf.Min(1.2f, player.m_Energy + m_EnergyRechargeRate);
-        }
+        // player.m_Energy =  Mathf.Max(0.2f, player.m_Energy - m_EnergyDrainSpeed);
+        // if(Input.GetKey("v"))
+        // {
+        //     player.m_Energy =  Mathf.Min(1.2f, player.m_Energy + m_EnergyRechargeRate);
+        // }
 
     }
 }
